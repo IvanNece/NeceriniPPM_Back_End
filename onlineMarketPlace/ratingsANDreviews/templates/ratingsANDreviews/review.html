@@ -1,0 +1,11 @@
+<form method="post" action="{% url 'reviewUser' receiverId %}">
+  {% csrf_token %}
+  <label for="text">Review:</label>
+  <textarea name="text"></textarea>
+  <button type="submit">Send</button>
+</form>
+
+
+#FINIRE NOMI DEI FILE HTML, fatto 
+#DIRECTORY NEGLI URLS.PY VEDENDO ANCHE GLI ALTRI, fatto
+#FARE LE MAKE E LE MIGRATE
