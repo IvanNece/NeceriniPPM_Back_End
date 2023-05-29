@@ -3,7 +3,7 @@
 {% block title %}Rate seller{% endblock %}
 
 {% block content %}
-<form method="post" action="{% url 'reviewUser' receiverId %}">
+<form method="post" action="{% url 'ratingsANDreviews:reviewUser' receiverId=receiverId %}">
   {% csrf_token %}
   <label for="text">Review:</label>
   <textarea name="text"></textarea>
