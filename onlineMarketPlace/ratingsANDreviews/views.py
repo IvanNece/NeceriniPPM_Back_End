@@ -16,7 +16,7 @@ def rateUser(request, receiverId):
         return redirect('pagina_profilo', receiverId)
     else:
         # attenzione alla pagina html //TODO
-        return render(request, 'rating.html', {'receiverId': receiverId})
+        return render(request, 'ratingsANDreviews/rating.html', {'receiverId': receiverId})
 
 @login_required
 def reviewUser(request, receiverId):
@@ -31,4 +31,4 @@ def reviewUser(request, receiverId):
         return redirect('pagina_profilo', receiverId)
     else:
         # attenzione alla pagina html //TODO
-        return render(request, 'review.html', {'receiverId': receiverId})
+        return render(request, 'ratingsANDreviews/review.html', {'receiverId': receiverId})
