@@ -1,6 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Rate seller{% endblock %}
+
+{% block content %}
 <form method="post" action="{% url 'reviewUser' receiverId %}">
   {% csrf_token %}
   <label for="text">Review:</label>
   <textarea name="text"></textarea>
   <button type="submit">Send</button>
 </form>
+{% endblock %}
+
