@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from item.models import Category, Item
+from .models import Cart, CartItem
 from .forms import SignupForm
+from django.http import JsonResponse
+import json
 
 # Create your views here.
 def index(request):
@@ -27,3 +30,21 @@ def signup(request):
          form = SignupForm()
          
     return render(request, 'core/signup.html', {'form': form})
+
+def cart(request):
+    context = {}
+    return render(request, 'core/cart.html', context)
+
+def addToCart(request):
+    data = json.loads(request.body)
+    item_id = data['id']
+    item = Item.objects.get(id=item_id)
+    
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
+        cartitem, created = CartItem.objects.get_or_create(cart=cart, item=item)
+        cartitem.quantity += 1
+        cartitem.save()
+        print(cartitem)
+    
+    return JsonResponse("Item was added", safe=False)
