@@ -32,7 +32,20 @@ def signup(request):
     return render(request, 'core/signup.html', {'form': form})
 
 def cart(request):
-    context = {}
+    
+    cart = None
+    cartItems = []
+    
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
+        cartItems = cart.cartItems.all()
+        
+        # Calcola il prezzo totale per ogni elemento nel carrello
+        for cartItem in cartItems:
+            cartItem.total_price = cartItem.quantity * cartItem.item.price
+    
+    context = {'cart': cart, 'cartItems': cartItems}
+    
     return render(request, 'core/cart.html', context)
 
 def addToCart(request):
