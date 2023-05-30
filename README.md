@@ -1,2 +1,4 @@
 # NeceriniPPM_Back_End
-Workout online marketplace in python (using django)
+E-coomerce in python (using django).
+E-commerce similar to "Vinted", similar to Facebook marketplace
+
