@@ -17,26 +17,31 @@ def rateUser(request, receiverId):
         )
         return redirect('ratingsANDreviews:userRatings')
     else:
-        # Attenzione alla pagina html //TODO
         return render(request, 'ratingsANDreviews/rating.html', {'receiverId': receiverId})
-
+    
 @login_required
 def reviewUser(request, receiverId):
     if request.method == 'POST':
-        text = request.POST.get('testo')
-        receiver = get_object_or_404(User, id=receiverId)
-        review = Review.objects.create(
-            author=request.user,
-            receiverId=receiver,
-            text=text
-        )
-        # da cambiare con la pagina del profilo //TODO
-        return redirect('pagina_profilo', receiverId)
+        text = request.POST.get('text')
+        if text:
+            receiver = get_object_or_404(User, id=receiverId)
+            review = Review.objects.create(
+                author=request.user,
+                receiverId=receiver,
+                text=text
+            )
+            return redirect('ratingsANDreviews:userReviews', receiverId=receiverId)
+        else:
+            return redirect('ratingsANDreviews:userReviews', receiverId=receiverId) 
     else:
-        # attenzione alla pagina html //TODO
         return render(request, 'ratingsANDreviews/review.html', {'receiverId': receiverId})
     
 @login_required
 def userRatings(request):
     ratings = Rating.objects.filter(author=request.user)
     return render(request, 'ratingsANDreviews/userRatings.html', {'ratings': ratings})
+
+@login_required
+def userReviews(request, receiverId):
+    reviews = Review.objects.filter(author=request.user)
+    return render(request, 'ratingsANDreviews/userReviews.html', {'reviews': reviews})
