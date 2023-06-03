@@ -4,11 +4,14 @@ from .models import Cart, CartItem
 from .forms import SignupForm
 from django.http import JsonResponse
 import json
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
     items = Item.objects.filter(isSold=False)[0:6]
     categories = Category.objects.all()
+    
+    cart = None
     
     if request.user.is_authenticated:
         cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
@@ -56,6 +59,9 @@ def addToCart(request):
     data = json.loads(request.body)
     item_id = data['id']
     item = Item.objects.get(id=item_id)
+    
+    cart = None
+    numItem = 0
     
     if request.user.is_authenticated:
         cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
