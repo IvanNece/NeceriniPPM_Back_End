@@ -36,6 +36,7 @@ function addToCart(e) {
     })
     .then(res => res.json())
     .then(data => {
+        document.getElementById("numOfItems").innerHTML = data;
         console.log(data);
     })
     .catch(err => {console.log(error);})

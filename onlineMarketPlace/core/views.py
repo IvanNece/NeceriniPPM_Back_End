@@ -10,9 +10,13 @@ def index(request):
     items = Item.objects.filter(isSold=False)[0:6]
     categories = Category.objects.all()
     
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
+    
     return render(request, 'core/index.html', {
         'items': items,
-        'categories': categories
+        'categories': categories,
+        'cart': cart,
     })
 
 def contact(request):
@@ -58,6 +62,9 @@ def addToCart(request):
         cartitem, created = CartItem.objects.get_or_create(cart=cart, item=item)
         cartitem.quantity += 1
         cartitem.save()
+        
+        numItem = cart.numOfItems
+        
         print(cartitem)
     
-    return JsonResponse("Item was added", safe=False)
+    return JsonResponse(numItem, safe=False)

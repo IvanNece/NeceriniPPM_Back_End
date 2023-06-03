@@ -4,6 +4,7 @@ from django.db.models import Q
 
 from .models import Item, Category
 from .forms import NewItemForm, EditItemForm
+from core.models import Cart
 
 # Create your views here.
 def items(request):
@@ -11,6 +12,10 @@ def items(request):
     categories = Category.objects.all()
     categoryId = request.GET.get('category', 0)
     items = Item.objects.filter(isSold=False)
+    
+    cart = None
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
     
     if categoryId:
         items = items.filter(category_id=categoryId)
@@ -24,18 +29,29 @@ def items(request):
         'query': query,
         'categories': categories,
         'categoryId': int(categoryId),
+        'cart': cart,
     })
 
 def detail(request, pk):
     item = get_object_or_404(Item, pk=pk)
     relatedItems = Item.objects.filter(category=item.category, isSold = False).exclude(pk=pk)[0:3]
+    
+    cart = None
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
+    
     return render(request, 'item/detail.html',{
         'item': item,
         'relatedItems': relatedItems,
+        'cart': cart,
     })
     
 @login_required
 def new(request):
+    cart = None
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
+    
     if request.method == 'POST':
         form = NewItemForm(request.POST, request.FILES)
         
@@ -52,6 +68,7 @@ def new(request):
     return render(request, 'item/form.html', {
         'form': form,
         'title': 'New item',
+        'cart': cart,
     })
     
 @login_required

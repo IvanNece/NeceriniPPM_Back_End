@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from item.models import Item
 from .models import Conversation
 from .forms import ConversationMessageForm
+from core.models import Cart
 
 # Create your views here.
 @login_required
@@ -38,17 +39,30 @@ def newConversation(request, itemPk):
         # create new empty form
         form = ConversationMessageForm()
         
-    return render(request, 'conversation/new.html', {'form': form,})
+    return render(request, 'conversation/new.html', {
+        'form': form,
+    })
 
 @login_required
 def inbox(request):
     conversations = Conversation.objects.filter(members__in=[request.user.id])
     
-    return render(request, 'conversation/inbox.html', {'conversations': conversations,})
+    cart = None
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
+    
+    return render(request, 'conversation/inbox.html', {
+        'conversations': conversations,
+        'cart': cart,
+    })
 
 @login_required
 def detail(request, pk):
     conversation = Conversation.objects.filter(members__in=[request.user.id]).get(pk=pk)
+    
+    cart = None
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
     
     if request.method  == 'POST':
         form = ConversationMessageForm(request.POST)
@@ -68,4 +82,5 @@ def detail(request, pk):
     return render(request, 'conversation/detail.html', {
         'conversation': conversation,
         'form': form,
+        'cart': cart,
     })

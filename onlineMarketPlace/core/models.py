@@ -13,6 +13,21 @@ class Cart(models.Model):
     def __str__(self):
         return str(self.id)
     
+    #Calcola il prezzo totale del carrello, sommando il totale_price di ogni elemento nel carrello
+    @property
+    def totalPrice(self):
+        cartItems = self.cartItems.all()
+        total = sum([item.item.price * item.quantity for item in cartItems])
+        return total
+    
+    @property
+    def numOfItems(self):
+        #Calcola il numero totale di elementi nel carrello
+        cartItems = self.cartItems.all()
+        quantity = sum([item.quantity for item in cartItems])
+        return quantity
+    
+    
 class CartItem(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='itemsCart')
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cartItems')
