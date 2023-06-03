@@ -99,6 +99,12 @@ def edit(request, pk):
         'title': 'Edit item',
     })
 
+
+@login_required
+def my_view(request):
+    # Logica della vista
+    return redirect('item:detail')
+
 @login_required
 def cart_item_count(request):
     cart = None
