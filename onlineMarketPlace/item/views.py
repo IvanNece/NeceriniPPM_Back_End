@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.http import JsonResponse
 
 from .models import Item, Category
 from .forms import NewItemForm, EditItemForm
@@ -97,3 +98,14 @@ def edit(request, pk):
         'form': form,
         'title': 'Edit item',
     })
+
+@login_required
+def cart_item_count(request):
+    cart = None
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
+        num_of_items = cart.numOfItems
+    else:
+        num_of_items = 0
+
+    return JsonResponse({'numOfItems': num_of_items})
