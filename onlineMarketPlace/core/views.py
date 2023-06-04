@@ -83,7 +83,7 @@ def addToCart(request):
 
 
 def removeFromCart(request):
-    if request.method == 'POST' and request.headers.get('x-requested-with') == 'XMLHttpRequest':
+    if request.method == 'DELETE':
         data = json.loads(request.body)
         item_id = data['id']
         
@@ -104,8 +104,7 @@ def removeFromCart(request):
         
         except (Item.DoesNotExist, CartItem.DoesNotExist):
             return HttpResponseBadRequest("Invalid item ID or cart item does not exist.")
-    
-    return HttpResponseBadRequest("Invalid request.")
+    return HttpResponseBadRequest("Element Removed correctly")
 
 def checkout(request):
     return redirect('core:checkout')
