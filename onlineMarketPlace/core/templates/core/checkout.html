@@ -1,39 +1,37 @@
 {% extends 'core/base.html' %}
 
 {% block title %}Checkout{% endblock %}
+
+{% block content %}
 <div class="flex flex-wrap">
   <!-- Shipping-Form Section -->
-  <div class="w-full md:w-1/2">
+  <div class="w-full md:w-2/5">
     <div class="bg-purple-600 rounded-xl p-6">
+      <h3 class="text-black mb-4 font-bold">SHIPPING INFORMATION:</h3>
       <form class="grid grid-cols-2 gap-4" id="shipping-form">
         <div id="shippingInfo">
-          <h3 class="text-white">Shipping Information</h3>
           <div class="grid grid-cols-2 gap-4">
             <div>
               <label for="address" class="block text-white">Address</label>
-              <input type="text" id="address" name="address" required
-                class="w-full py-2 px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-700">
+              <input type="text" id="address" name="address" required class="w-full py-2 px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-700">
             </div>
             <div>
               <label for="city" class="block text-white">City</label>
-              <input type="text" id="city" name="city" required
-                class="w-full py-2 px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-700">
+              <input type="text" id="city" name="city" required class="w-full py-2 px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-700">
             </div>
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div>
               <label for="state" class="block text-white">State</label>
-              <input type="text" id="state" name="state" required
-                class="w-full py-2 px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-700">
+              <input type="text" id="state" name="state" required class="w-full py-2 px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-700">
             </div>
             <div>
               <label for="zipcode" class="block text-white">Zipcode</label>
-              <input type="text" id="zipcode" name="zipcode" required
-                class="w-full py-2 px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-700">
+              <input type="text" id="zipcode" name="zipcode" required class="w-full py-2 px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-700">
             </div>
           </div>
         </div>
-        <div class="col-span-2">
+        <div class="col-span-2 mt-4">
           <div class="flex justify-end">
             <button type="submit" class="bg-purple-700 hover:bg-purple-900 text-white py-2 px-4 rounded-xl">Continue</button>
           </div>
@@ -41,7 +39,37 @@
       </form>
     </div>
   </div>
-</div>
-{% block content %}
 
+  <!-- White Space Section -->
+  <div class="w-full md:w-1/5"></div>
+
+  <!-- Order Summary Section -->
+  <div class="w-full md:w-2/5">
+    <div class="bg-purple-600 rounded-xl p-6">
+      <h3 class="text-white">Order Summary</h3>
+      <div class="border border-gray-900 rounded-xl p-4 mt-4">
+        {% for cartItem in cartItems %}
+        <div class="flex justify-between items-center">
+          <span>{{ cartItem.item.name }}</span>
+          <span>{{ cartItem.item.price }}</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span>Quantity: {{ cartItem.quantity }}</span>
+          <span>Total: {{ cartItem.total_price }}</span>
+        </div>
+        <hr class="my-2 border-gray-700">
+        {% endfor %}
+        <div class="flex justify-between items-center">
+          <span class="font-bold">Total Price:</span>
+          <span class="font-bold">{{ cart.totalPrice }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
+
+
+
+
+

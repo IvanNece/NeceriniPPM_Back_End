@@ -106,6 +106,13 @@ def removeFromCart(request):
             return HttpResponseBadRequest("Invalid item ID or cart item does not exist.")
     return HttpResponseBadRequest("Element Removed correctly")
 
+@login_required
 def checkout(request):
-    return redirect('core:checkout')
+    cart = None
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
+    
+    return render(request, 'core/checkout.html', {
+        'cart': cart,
+    })
 
