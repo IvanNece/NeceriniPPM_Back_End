@@ -3,6 +3,7 @@ from item.models import Category, Item
 from .models import Cart, CartItem
 from .forms import SignupForm
 from django.http import JsonResponse
+from django.contrib.auth import logout
 from django.http import HttpResponseBadRequest
 import json
 from django.contrib.auth.decorators import login_required
@@ -38,6 +39,10 @@ def signup(request):
          form = SignupForm()
          
     return render(request, 'core/signup.html', {'form': form})
+
+def logoutView(request):
+    logout(request)
+    return redirect('core:index')  # Redirect to your desired page after logout
 
 def cart(request):
     
