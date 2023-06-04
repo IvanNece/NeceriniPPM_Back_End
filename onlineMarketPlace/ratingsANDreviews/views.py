@@ -45,3 +45,9 @@ def userRatings(request):
 def userReviews(request, receiverId):
     reviews = Review.objects.filter(author=request.user)
     return render(request, 'ratingsANDreviews/userReviews.html', {'reviews': reviews})
+
+@login_required
+def myRatingsAndMyReviews(request):
+    ratings = Rating.objects.filter(author=request.user)
+    reviews = Review.objects.filter(author=request.user)
+    return render(request, 'ratingsANDreviews/myRatingsAndMyReviews.html', {'ratings': ratings, 'reviews': reviews})

@@ -10,4 +10,5 @@ urlpatterns = [
     path('user/ratings/', views.userRatings, name='userRatings'),
     # path('user/reviews/', views.userReviews, name='userReviews'),
     path('user/reviews/<int:receiverId>/', views.userReviews, name='userReviews'),
+    path('myRatingsAndMyReviews/', views.myRatingsAndMyReviews, name='myRatingsAndMyReviews'),
 ]
