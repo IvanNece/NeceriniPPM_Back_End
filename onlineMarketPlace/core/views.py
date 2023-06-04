@@ -82,7 +82,6 @@ def addToCart(request):
     return JsonResponse(numItem, safe=False)
 
 
-@login_required
 def removeFromCart(request):
     if request.method == 'POST' and request.headers.get('x-requested-with') == 'XMLHttpRequest':
         data = json.loads(request.body)
@@ -107,4 +106,7 @@ def removeFromCart(request):
             return HttpResponseBadRequest("Invalid item ID or cart item does not exist.")
     
     return HttpResponseBadRequest("Invalid request.")
+
+def checkout(request):
+    return redirect('core:checkout')
 
