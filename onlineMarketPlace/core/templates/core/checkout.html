@@ -48,6 +48,11 @@
     <div class="bg-purple-600 rounded-xl p-6">
       <h3 class="text-white">Order Summary</h3>
       <div class="border border-gray-900 rounded-xl p-4 mt-4">
+        <div class="flex justify-between items-center">
+          <span class="font-bold">Total Price:</span>
+          <span class="font-bold">{{ total_price }}</span>
+        </div>
+        <hr class="my-2 border-gray-700"> <!-- Linea orizzontale -->
         {% for cartItem in cartItems %}
         <div class="flex justify-between items-center">
           <span>{{ cartItem.item.name }}</span>
@@ -59,10 +64,6 @@
         </div>
         <hr class="my-2 border-gray-700">
         {% endfor %}
-        <div class="flex justify-between items-center">
-          <span class="font-bold">Total Price:</span>
-          <span class="font-bold">{{ cart.totalPrice }}</span>
-        </div>
       </div>
     </div>
   </div>

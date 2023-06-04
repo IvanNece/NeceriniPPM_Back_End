@@ -106,13 +106,25 @@ def removeFromCart(request):
             return HttpResponseBadRequest("Invalid item ID or cart item does not exist.")
     return HttpResponseBadRequest("Element Removed correctly")
 
+
 @login_required
 def checkout(request):
     cart = None
+    cartItems = []
+
     if request.user.is_authenticated:
         cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
-    
-    return render(request, 'core/checkout.html', {
-        'cart': cart,
-    })
+        cartItems = cart.cartItems.all()
+
+    # Calcola il prezzo totale per ogni elemento nel carrello
+    for cartItem in cartItems:
+        cartItem.total_price = cartItem.quantity * cartItem.item.price
+
+    # Calcola il prezzo totale del carrello
+    total_price = sum(cartItem.total_price for cartItem in cartItems)
+
+    context = {'cart': cart, 'cartItems': cartItems, 'total_price': total_price}
+
+    return render(request, 'core/checkout.html', context)
+
 
