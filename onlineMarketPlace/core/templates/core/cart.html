@@ -39,6 +39,13 @@
         <h1>Total Price: {{ cart.totalPrice }}</h1>
     </div>
 
+    <h2 class="font-bold bg-purple-600 text-center rounded-xl text-xl p-4">
+        <div class="flex justify-between">
+            <a href="{% url 'item:items' %}" class="px-4 py-2 bg-purple-700 text-white rounded-xl hover:bg-purple-900">Continue shopping -></a>
+            <a href="#" class="px-4 py-2 bg-purple-700 text-white rounded-xl hover:bg-purple-900">Checkout</a>
+        </div>
+    </h2>
+
 </div>
 {% endblock %}
 
