@@ -3,6 +3,7 @@ from item.models import Category, Item
 from .models import Cart, CartItem
 from .forms import SignupForm
 from django.http import JsonResponse
+from django.http import HttpResponseBadRequest
 import json
 from django.contrib.auth.decorators import login_required
 
@@ -74,3 +75,31 @@ def addToCart(request):
         print(cartitem)
     
     return JsonResponse(numItem, safe=False)
+
+
+@login_required
+def removeFromCart(request):
+    if request.method == 'POST' and request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        data = json.loads(request.body)
+        item_id = data['id']
+        
+        try:
+            item = Item.objects.get(id=item_id)
+            cart_item = CartItem.objects.get(cart=request.user.cart, item=item)
+            
+            if cart_item.quantity > 1:
+                cart_item.quantity -= 1
+                cart_item.save()
+            else:
+                cart_item.delete()
+            
+            cart = Cart.objects.get(user=request.user, completed=False)
+            num_items = cart.numOfItems
+            
+            return JsonResponse(num_items, safe=False)
+        
+        except (Item.DoesNotExist, CartItem.DoesNotExist):
+            return HttpResponseBadRequest("Invalid item ID or cart item does not exist.")
+    
+    return HttpResponseBadRequest("Invalid request.")
+

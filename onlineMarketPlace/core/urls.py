@@ -13,4 +13,5 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='core/login.html', authentication_form=LoginForm), name='login'),
     path('cart/', views.cart, name='cart'),
     path('addToCart/', views.addToCart, name='addToCart'),
+    path('removeFromCart/', views.removeFromCart, name='removeFromCart'),
 ]
