@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
-    items = Item.objects.filter(isSold=False)[0:6]
+    items = Item.objects.filter(isSold=False).order_by('-createdAt')[:6]
     categories = Category.objects.all()
     
     cart = None
