@@ -139,6 +139,16 @@ def paymentView(request):
     
     return render(request, 'core/payment.html', context)
 
+@login_required
+def empty_cart(request):
+    # Recupera il carrello dell'utente attuale
+    cart = Cart.objects.get(user=request.user, completed=False)
+
+    # Elimina tutti gli oggetti nel carrello
+    CartItem.objects.filter(cart=cart).delete()
+
+    return redirect('core:index')
+
 
 
 
