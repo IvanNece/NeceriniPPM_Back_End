@@ -86,10 +86,10 @@ def removeFromCart(request):
     if request.method == 'DELETE':
         data = json.loads(request.body)
         item_id = data['id']
-        
         try:
+            cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
             item = Item.objects.get(id=item_id)
-            cart_item = CartItem.objects.get(cart=request.user.cart, item=item)
+            cart_item = CartItem.objects.get(cart=cart, item=item)
             
             if cart_item.quantity > 1:
                 cart_item.quantity -= 1

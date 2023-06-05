@@ -43,19 +43,16 @@ function addToCart(e) {
 
 
 
-// Aggiungi il seguente codice per associare il gestore di eventi al pulsante del cestino
-let removeBtns = document.querySelectorAll("button[data-item-id]");
-
-removeBtns.forEach(btn => {
-    btn.addEventListener("click", removeFromCart);
-});
-
+function printDebug(e) {
+    console.log(e);
+}
 
 function removeFromCart(e) {
-    let item_id = e.currentTarget.getAttribute('data-item-id');
+    //let item_id = e.currentTarget.getAttribute('data-item-id');
+    console.log("removeMethodJS");
     let url = "/removeFromCart/";
-
-    let data = { id: item_id };
+    let data = { id: e };
+    console.log(e);
 
     fetch(url, {
         method: "DELETE",
@@ -74,4 +71,5 @@ function removeFromCart(e) {
         console.log(data);
     })
     .catch(err => { console.log(err); });
+    location.reload();
 }

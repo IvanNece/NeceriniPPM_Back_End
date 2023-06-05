@@ -25,7 +25,7 @@
             <div>{{ cartItem.item.price }}</div>
             <div class="flex items-center justify-center">
                 <span class="mr-2">{{ cartItem.total_price }}</span>
-                <button data-item-id="{{ cartItem.item.id }}" id="removeItemBtn{{ cartItem.item.id }}" class="flex items-center justify-center bg-transparent border-none outline-none cursor-pointer">
+                <button data-item-id="{{ cartItem.item.id }}" onClick= removeFromCart("{{ cartItem.item.id }}") class="flex items-center justify-center bg-transparent border-none outline-none cursor-pointer" id="removeButton">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
                         <path fill-rule="evenodd" d="M4 5a1 1 0 011-1h10a1 1 0 011 1v1H4V5zm11.293 2H4v8a2 2 0 002 2h8a2 2 0 002-2V7h-2.707zM8 9a1 1 0 00-1 1v5a1 1 0 102 0v-5a1 1 0 00-1-1zm4 0a1 1 0 00-1 1v5a1 1 0 102 0v-5a1 1 0 00-1-1z" clip-rule="evenodd" />
                     </svg>
