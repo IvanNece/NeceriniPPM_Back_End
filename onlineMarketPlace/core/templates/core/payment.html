@@ -7,7 +7,8 @@
   <div class="w-full md:w-2/3 lg:w-1/2">
     <div class="bg-purple-600 rounded-xl p-6">
       <h3 class="text-black mb-4 font-bold">PAYMENT INFORMATION:</h3>
-      <form id="payment-form">
+      <form id="payment-form" action="{% url 'core:index' %}?payment_success=true" method="POST">
+        {% csrf_token %}
         <div>
           <label for="card-number" class="block text-white">Card Number</label>
           <input type="text" id="card-number" name="card-number" required class="w-full py-2 px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-700">
@@ -40,5 +41,6 @@
   </div>
 </div>
 {% endblock %}
+
 
 
