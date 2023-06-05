@@ -72,5 +72,4 @@ function removeFromCart(e) {
         console.log(data);
     })
     .catch(err => { console.log(err); });
-    // location.reload();
 }

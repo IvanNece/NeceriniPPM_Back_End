@@ -127,4 +127,18 @@ def checkout(request):
 
     return render(request, 'core/checkout.html', context)
 
+@login_required
+def paymentView(request):
+    cart = None
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(user=request.user, completed=False)
+    
+    context = {
+        'cart': cart,
+    }
+    
+    return render(request, 'core/payment.html', context)
+
+
+
 

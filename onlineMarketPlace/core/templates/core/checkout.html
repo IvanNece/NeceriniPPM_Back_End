@@ -10,30 +10,27 @@
       <h3 class="text-black mb-4 font-bold">SHIPPING INFORMATION:</h3>
       <form class="grid grid-cols-2 gap-4" id="shipping-form">
         <div id="shippingInfo">
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label for="address" class="block text-white">Address</label>
-              <input type="text" id="address" name="address" required class="w-full py-2 px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-700">
-            </div>
-            <div>
-              <label for="city" class="block text-white">City</label>
-              <input type="text" id="city" name="city" required class="w-full py-2 px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-700">
-            </div>
+          <div>
+            <label for="address" class="block text-white">Address</label>
+            <input type="text" id="address" name="address" required class="w-full py-2 px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-700">
           </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label for="state" class="block text-white">State</label>
-              <input type="text" id="state" name="state" required class="w-full py-2 px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-700">
-            </div>
-            <div>
-              <label for="zipcode" class="block text-white">Zipcode</label>
-              <input type="text" id="zipcode" name="zipcode" required class="w-full py-2 px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-700">
-            </div>
+          <div>
+            <label for="city" class="block text-white">City</label>
+            <input type="text" id="city" name="city" required class="w-full py-2 px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-700">
+          </div>
+          <div>
+            <label for="state" class="block text-white">State</label>
+            <input type="text" id="state" name="state" required class="w-full py-2 px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-700">
+          </div>
+          <div>
+            <label for="zipcode" class="block text-white">Zipcode</label>
+            <input type="text" id="zipcode" name="zipcode" required class="w-full py-2 px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-700">
           </div>
         </div>
+
         <div class="col-span-2 mt-4">
           <div class="flex justify-end">
-            <button type="submit" class="bg-purple-700 hover:bg-purple-900 text-white py-2 px-4 rounded-xl">Continue</button>
+            <a href="{% url 'core:payment' %}" class="bg-purple-700 hover:bg-purple-900 text-white py-2 px-4 rounded-xl cursor-pointer">Continue</a>
           </div>
         </div>
       </form>
