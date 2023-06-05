@@ -48,7 +48,7 @@ function printDebug(e) {
 }
 
 function removeFromCart(e) {
-    //let item_id = e.currentTarget.getAttribute('data-item-id');
+    
     console.log("removeMethodJS");
     let url = "/removeFromCart/";
     let data = { id: e };
@@ -61,7 +61,8 @@ function removeFromCart(e) {
     })
     .then(response => {
         if (response.ok) {
-            return response.json();
+            console.log(response.json());
+            location.reload();
         } else {
             throw new Error('Error: ' + response.status);
         }
@@ -71,5 +72,5 @@ function removeFromCart(e) {
         console.log(data);
     })
     .catch(err => { console.log(err); });
-    location.reload();
+    // location.reload();
 }
