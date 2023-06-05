@@ -3,6 +3,15 @@
 {% block title %}Welcome{% endblock %}
 
 {% block content %}
+
+    <div id="popup" class="hidden fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-75 flex items-center justify-center">
+        <div class="bg-white rounded-lg p-6">
+            <h2 class="text-xl font-semibold mb-2">Payment successful!</h2>
+            <p>Your payment has been processed successfully.</p>
+        </div>
+    </div>
+
+
     <div class="mt-6 px-6 py-12 bg-purple-600 rounded-xl">
         <h2 class="mb-12 text-2xl text-center font-semibold"> Categories </h2>
 
@@ -41,5 +50,26 @@
             {% endfor %}
         </div>
     </div>
+
+    <script>
+        // Funzione per nascondere il popup
+        function hidePopup() {
+            var popup = document.getElementById("popup");
+            popup.classList.add("hidden");
+        }
+
+        // Funzione per mostrare il popup e avviare il timer per nasconderlo
+        function showPopup() {
+            var popup = document.getElementById("popup");
+            popup.classList.remove("hidden");
+
+            // Nascondi il popup dopo 1 secondo
+            setTimeout(hidePopup, 1500);
+        }
+
+        // Mostra il popup all'apertura della pagina
+        showPopup();
+    </script>
+
 
 {% endblock %}
