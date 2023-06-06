@@ -2,6 +2,9 @@
 
 Un e-commerce/online marketplace
 
+## Link deploy fatto con Railway
+https://web-production-49b9.up.railway.app/
+
 ## Descrizione
 
 Il progetto è un e-commerce/online marketplace ispirato a piattaforme come Vinted (definito e-commerce) o Facebook Marketplace, che consente agli utenti di vendere e acquistare prodotti da diversi venditori. L'applicazione offre funzionalità di registrazione, accesso, ricerca di articoli con dei filtri, aggiunta al carrello, contatto con il venditore, recensioni, conversazioni, checkout e pagamento.
@@ -41,6 +44,7 @@ Il progetto è un e-commerce/online marketplace ispirato a piattaforme come Vint
 -Daniele, daniLopro@gmail.com, dani12345
 -Giuseppe, giuse@gmail.com, giuse12345
 -Mattia. matti@gmail.com, matti12345
+-gabriele, gabri12345 (creato dal sito già deployato)
 
 ## Note di utilizzo
 
