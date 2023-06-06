@@ -33,13 +33,24 @@
         </div>
         <div class="mt-4">
           <div class="flex justify-end">
-            <button type="submit" class="bg-purple-700 hover:bg-purple-900 text-white py-2 px-4 rounded-xl">Submit Payment</button>
+            <button id="submit-payment-button" type="submit" class="bg-purple-700 hover:bg-purple-900 text-white py-2 px-4 rounded-xl">Submit Payment</button>
           </div>
         </div>
       </form>
     </div>
   </div>
 </div>
+
+
+<script>
+
+  // Quando il bottone "Submit Payment" viene premuto
+  document.getElementById("submit-payment-button").addEventListener("click", function() {
+    // Memorizza la variabile di stato nell'API Web Storage
+    sessionStorage.setItem("paymentSubmitted", "true");
+  });
+
+</script>
 
 {% endblock %}
 
