@@ -41,30 +41,6 @@
   </div>
 </div>
 
-{% comment %} //aggiunta che non fa {% endcomment %}
-<script>
-  // Funzione per aggiungere il parametro show_popup all'URL
-  function redirectToIndex() {
-    var url = "{% url 'core:index' %}";
-    var redirectUrl = new URL(url);
-
-    // Aggiungi il parametro show_popup=true all'URL
-    redirectUrl.searchParams.set('show_popup', 'true');
-
-    // Aggiungi un parametro casuale per evitare la cache
-    redirectUrl.searchParams.set('random', Math.random().toString(36).substring(7));
-
-    // Effettua il redirect alla pagina index.html con il parametro show_popup=true
-    window.location.href = redirectUrl.toString();
-  }
-
-
-  // Aggiungi un listener per il submit del form
-  var paymentForm = document.getElementById('payment-form');
-  paymentForm.addEventListener('submit', redirectToIndex);
-</script>
-
-
 {% endblock %}
 
 
