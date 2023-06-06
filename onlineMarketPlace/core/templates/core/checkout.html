@@ -24,13 +24,13 @@
           </div>
           <div>
             <label for="zipcode" class="block text-white">Zipcode</label>
-            <input type="text" id="zipcode" name="zipcode" required class="w-full py-2 px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-700">
+            <input type="text" id="zipcode" name="zipcode" pattern="[0-9]{5}" required class="w-full py-2 px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-purple-700" placeholder="Valid zip code (5 number)">
           </div>
         </div>
 
         <div class="col-span-2 mt-4">
           <div class="flex justify-end">
-            <a href="{% url 'core:payment' %}" class="bg-purple-700 hover:bg-purple-900 text-white py-2 px-4 rounded-xl cursor-pointer">Continue</a>
+            <a href="#" onclick="validateForm()" class="bg-purple-700 hover:bg-purple-900 text-white py-2 px-4 rounded-xl cursor-pointer">Continue</a>
           </div>
         </div>
       </form>
@@ -65,6 +65,23 @@
     </div>
   </div>
 </div>
+
+
+<script>
+function validateForm() {
+  var zipcodeInput = document.getElementById("zipcode");
+  var zipcodePattern = /^\d{5}$/;
+  
+  if (!zipcodePattern.test(zipcodeInput.value)) {
+    alert("Invalid zip code. Please enter a valid 5-digit zip code.");
+    return false;
+  }
+  
+  // Se il codice zip è valido, puoi procedere con il link "Continue"
+  window.location.href = "{% url 'core:payment' %}";
+}
+</script>
+
 {% endblock %}
 
 
