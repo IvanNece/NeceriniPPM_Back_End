@@ -64,27 +64,57 @@
         function showPopup(message) {
             // Crea l'elemento del popup
             var popup = document.createElement("div");
-            popup.className = "popup";
             popup.textContent = message;
-            popup.style.position = "fixed";
-            popup.style.top = "50%";
-            popup.style.left = "50%";
-            popup.style.transform = "translate(-50%, -50%)";
-            popup.style.padding = "10px 20px";
-            popup.style.backgroundColor = "#fff";
-            popup.style.border = "1px solid #ccc";
-            popup.style.borderRadius = "4px";
-            popup.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.2)";
-            popup.style.fontSize = "16px";
-            popup.style.color = "#333";
+            popup.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                padding: 30px;
+                background-color: #fff;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                font-size: 18px;
+                color: #333;
+                z-index: 9999;
+            `;
 
             // Aggiungi il popup al body del documento
             document.body.appendChild(popup);
 
-            // Rimuovi il popup dopo un secondo
+            // Aggiungi la classe "darken" al body per scurire il resto della pagina
+            var darkenBackground = document.createElement("div");
+            darkenBackground.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(102, 51, 153, 0.8);
+                z-index: 9998;
+            `;
+            document.body.appendChild(darkenBackground);
+
+            // Rimuovi il popup e lo sfondo scuro dopo un secondo
             setTimeout(function() {
                 document.body.removeChild(popup);
-            }, 1000);
+                document.body.removeChild(darkenBackground);
+                document.body.style.overflow = "";
+            }, 1500);
+
+            // Rimuovi il popup e lo sfondo scuro quando viene cliccato
+            var removePopup = function() {
+                document.body.removeChild(popup);
+                document.body.removeChild(darkenBackground);
+                document.body.style.overflow = "";
+            };
+
+            popup.addEventListener("click", removePopup);
+            darkenBackground.addEventListener("click", removePopup);
+
+            // Impedisci lo scrolling della pagina dietro al popup
+            document.body.style.overflow = "hidden";
         }
 
     </script>
