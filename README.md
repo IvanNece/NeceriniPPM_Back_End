@@ -18,7 +18,7 @@ Il progetto è un e-commerce/online marketplace ispirato a piattaforme come Vint
 - Dashboard per gli utenti per visualizzare gli articoli inseriti
 
 - Contatto con i venditori
-- Conversazioni (inbox) tra acquirenti e venditori
+- Conversazioni (inbox) tra acquirenti e venditori, cliccare sulla conversazione per estenderla e rispondere ai messaggi / visualizzarli
 
 - Recensioni e voti per i venditori
 - Visualizzazione delle recensioni e dei voti dell'utente
@@ -39,16 +39,14 @@ Il progetto è un e-commerce/online marketplace ispirato a piattaforme come Vint
 ## Utenti creati
 
 -USERNAME, EMAIL, PASSWORD
--admin, admin@gmail.com, admin12345
 -Ivan, ivan.necerini@gmail.com, ivan12345
 -Daniele, daniLopro@gmail.com, dani12345
 -Giuseppe, giuse@gmail.com, giuse12345
 -Mattia. matti@gmail.com, matti12345
 -gabriele, gabri12345 (creato dal sito già deployato)
 
-## Note di utilizzo
+## Note codice
 
--Aprire la cartella generale scaricabile da github, usare "cd onlineMarketPlace" per entrare nella cartella del progetto principale e poi usare "python manage.py runserver" per avviare il server
 -Invece di usare "modifiedAt" uso "modfiedAt" senza una "i" per errore
 
 
